@@ -109,7 +109,11 @@ class RenameAction : AnAction() {
         private val PASCAL_PATTERN = Regex("_([a-z])")
 
         fun androidIdToVariable(id: String): String {
-            return toPascal(id.substringAfter('/'))
+            if (id.contains('_')) {
+                return toPascal(id.substringAfter('_'))
+            }
+            // else leave as-is
+            return id;
         }
 
         fun previewVariable(id: String, accessor: String?): String {
